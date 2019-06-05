@@ -15,7 +15,13 @@ class CreatePeopleTable extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name')->nullable($value = true);
+            $table->integer('tall')->nullable($value = true);
+            $table->integer('old')->nullable($value = true);
+            $table->integer('bust')->nullable($value = true);
+            $table->string('cup')->nullable($value = true);
+            $table->integer('west')->nullable($value = true);
+            $table->integer('hip')->nullable($value = true);
             $table->timestamps();
         });
     }

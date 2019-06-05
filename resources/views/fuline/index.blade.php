@@ -5,8 +5,8 @@
 @section('content')
     <form action="" method="post">
         {{ csrf_field() }}
-        <label for="name">名前</label>
-        <input type="text" name="name" id="name">
+        <label for="">名前</label>
+        <input type="text" name="name">
         <input type="submit" value="登録">
     </form>
     <ul>
