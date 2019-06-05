@@ -11,5 +11,5 @@
 |
 */
 
-Route::get('/','FulineController@index');
-Route::post('/','FulineController@add');
+Route::get('/','PersonController@index');
+Route::post('/','PersonController@create');
