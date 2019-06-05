@@ -13,3 +13,5 @@
 
 Route::get('/','PersonController@index');
 Route::post('/','PersonController@create');
+
+Route::post('del',['as'=>'del', 'uses' => 'PersonController@remove']);
