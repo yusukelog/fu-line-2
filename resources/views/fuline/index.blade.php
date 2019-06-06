@@ -10,8 +10,14 @@
         <input type="submit" value="登録">
     </form>
     <ul>
-        @foreach($items as $item)
-            <li class="mb-1">{{$item->getData()}} <button data-id="{{$item->id}}" class="del btn btn-dark rounded-pill">削除</button></li>
+        @foreach($items as $key => $item)
+            <li class="mb-1">
+                {{$item->getData()}}
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="inlineCheckbox{{$key}}"  name="monitor_chk">
+                    <label class="form-check-label" for="inlineCheckbox{{$key}}" style="cursor: pointer;">監視する</label>
+                </div>
+            </li>
         @endforeach
     </ul>
 @endsection

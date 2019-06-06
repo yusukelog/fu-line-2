@@ -10,8 +10,8 @@ class Person extends Model
     protected $guarded = array('id');
     public function getData()
     {
-        //return  $this->name .' ' . $this->old . '歳 ' . $this->tall . 'cm ' . 'B' .$this->bust . '(' . $this->cup . ')' .'W' . $this->west . 'H' . $this->hip;
-        return  $this->name;
+        return  $this->name  . $this->tall . 'cm ' . 'B' .$this->bust . '(' . $this->cup . ')' .'W' . $this->west . 'H' . $this->hip;
+        //return  $this->name;
     }
 
     public static $rules = array(
