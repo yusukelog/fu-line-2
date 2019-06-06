@@ -39,7 +39,7 @@ class Scraping extends Command
      */
     public function handle()
     {
-        global $names,$time,$message,$week;
+        global $names,$message,$week;
         $names = ['中山','水城','竹内','小野','桐谷','亀井','田中'];
 
         $goutte = GoutteFacade::request('GET', 'https://www.cityheaven.net/kanagawa/A1403/A140301/elegaku/attend/');
@@ -50,7 +50,7 @@ class Scraping extends Command
             });
         });
 
-        if($week != file_get_contents("week.txt")){
+        //if($week != file_get_contents("week.txt")){
             file_put_contents("week.txt", trim($week));
             $goutte->filter('#contents_main')->each(function ($ul) {
                 $ul->filter('.item-0')->each(function ($it) {
@@ -77,5 +77,5 @@ class Scraping extends Command
                 ]
             ]);
         }
-    }
+    //}
 }
