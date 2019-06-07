@@ -40,8 +40,8 @@ class CastScrape extends Command
      */
     public function handle()
     {
-        global $code;
-        $casts = Person::all();
+        global $code,$message;
+        $casts = Person::where('check',1)->get();
         foreach ($casts as $cast){
             $url = $cast->url;
             $code = $cast->code;
@@ -58,8 +58,32 @@ class CastScrape extends Command
                     });
                 });
             });
-            global $data,$code;
-            Person::where('code', $code)->update(['time' => serialize(array_combine($data['days'],$data['time']))]);
+            global $data,$code,$times,$message;
+            $times = array_combine($data['days'],$data['time']);
+
+            if($times != unserialize($cast->time)){
+                $shce = "";
+                foreach ($times as $key => $val){
+                    $shce .= $key . ":" . $val . "\n";
+                }
+                $message .= "\n" .$cast->name . "\n" . $shce;
+                notice ();
+                Person::where('code', $code)->update(['time' => serialize($times)]);
+            }
+        }
+        function notice (){
+            global $message;
+            $uri = 'https://notify-api.line.me/api/notify';
+            $client = new Client();
+            $client->post($uri, [
+                'headers' => [
+                    'Content-Type'  => 'application/x-www-form-urlencoded',
+                    'Authorization' => 'Bearer eTKxIWnkJPriXwGcH0cNWYtAkvWQQ8NzrGM7x22DGBK',
+                ],
+                'form_params' => [
+                    'message' => "\n".$message,
+                ]
+            ]);
         }
     }
 }

@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\Scraping::class,
-        \App\Console\Commands\TestCommand::class,
+        \App\Console\Commands\CastScrape::class,
+        //\App\Console\Commands\TestCommand::class,
     ];
 
     /**
@@ -25,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('command:scraping')->everyMinute();
-        $schedule->command('command:testcommand')->everyMinute();
+        $schedule->command('command:castscrape')->everyMinute();
+        //$schedule->command('command:testcommand')->everyMinute();
         // $schedule->command('inspire')
         //          ->hourly();
     }

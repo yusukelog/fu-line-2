@@ -17,7 +17,7 @@
                     <a class="font-weight-bold text-dark" href="{{$item->url}}"><u>{{$item->name}}</u></a>
                 </div>
                 @if($item->getTime())
-                <div class="time row col-sm-9">
+                <div class="time row col-sm-9 d-flex align-items-center">
                     @foreach($item->getTime() as $yobi => $time)
                     <dl class="col-sm">
                         <dt>{{$yobi}}</dt>
