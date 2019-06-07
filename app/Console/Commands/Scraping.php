@@ -97,16 +97,5 @@ class Scraping extends Command
                 $person->fill($val)->save();
             }
         };
-//        $uri = 'https://notify-api.line.me/api/notify';
-//        $client = new Client();
-//        $client->post($uri, [
-//            'headers' => [
-//                'Content-Type'  => 'application/x-www-form-urlencoded',
-//                'Authorization' => 'Bearer eTKxIWnkJPriXwGcH0cNWYtAkvWQQ8NzrGM7x22DGBK',
-//            ],
-//            'form_params' => [
-//                'message' => $message,
-//            ]
-//        ]);
     }
 }
