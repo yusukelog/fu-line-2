@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Person;
 use App\Console\Commands\Scraping;
+use App\Console\Commands\CastScrape;
 
 class PersonController extends Controller
 {
@@ -18,7 +19,9 @@ class PersonController extends Controller
     public function update(Request $request)
     {
         $scraping = new Scraping;
+        $castscrape = new CastScrape;
         $scraping->handle();
+        $castscrape->handle();
         return redirect('./');
     }
 
