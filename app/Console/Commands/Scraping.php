@@ -91,7 +91,11 @@ class Scraping extends Command
         });
         foreach ($data as $val){
             $person = new Person;
-            $person->fill($val)->save();
+            //すでに取得したキャストは新規登録しない
+            if(count(Person::where('code', '=' , $val['code'])->get()) == 0)
+            {
+                $person->fill($val)->save();
+            }
         };
 //        $uri = 'https://notify-api.line.me/api/notify';
 //        $client = new Client();

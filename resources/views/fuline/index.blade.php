@@ -5,16 +5,17 @@
 @section('content')
     <form action="" method="post">
         {{ csrf_field() }}
-        <label for="">名前</label>
-        <input type="text" name="name">
-        <input type="submit" value="登録">
+        <input type="hidden" name="update">
+        <input type="submit" value="リストの更新">
     </form>
     <ul>
         @foreach($items as $key => $item)
+            @php $key++; @endphp
             <li class="mb-1">
-                {{$item->getData()}}
+                <span>{{$key}}</span>
+                {{$item->name}}
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="inlineCheckbox{{$key}}"  name="monitor_chk">
+                    <input {{ $item->check === 1? 'checked="checked"' : '' }} type="checkbox" class="form-check-input" id="inlineCheckbox{{$key}}" name="code_{{$item->code}}" data-code="{{$item->code}}">
                     <label class="form-check-label" for="inlineCheckbox{{$key}}" style="cursor: pointer;">監視する</label>
                 </div>
             </li>
@@ -29,17 +30,19 @@
 @section('page-js')
     <script>
         $(function () {
-            $('body').on('click', '.del.btn', function () {
-                $btn_elm = $(this);
-                const id = $btn_elm.data('id');
+            $('body').on('change', '.form-check-input', function () {
+                let check,code;
+                code = $(this).data('code')
+                if($(this).prop('checked') == true){
+                    check = 1;
+                }else {
+                    check = 0;
+                }
                 $.ajax({
-                    url: '{{ route('del') }}',
+                    url: '{{ route('chk') }}',
                     type: "POST",
-                    data: {id: id, _token: '{{ csrf_token() }}'},
+                    data: {code: code, check: check, _token: '{{ csrf_token() }}'},
                     success: function (data) {
-                        if (data.success == 1) {
-                            $btn_elm.parent().fadeOut();
-                        }
                     }
                 });
             });

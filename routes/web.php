@@ -12,6 +12,7 @@
 */
 
 Route::get('/','PersonController@index');
-Route::post('/','PersonController@create');
+Route::post('/','PersonController@update');
 
-Route::post('del',['as'=>'del', 'uses' => 'PersonController@remove']);
+Route::get('chk',['as'=>'chk', 'uses' => 'PersonController@chk']);
+Route::post('chk',['as'=>'chk', 'uses' => 'PersonController@chk']);
