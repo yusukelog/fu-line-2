@@ -40,14 +40,26 @@ class CastScrape extends Command
      */
     public function handle()
     {
-        $casts = Person::where('check',1)->get();
+        global $code;
+        $casts = Person::all();
         foreach ($casts as $cast){
             $url = $cast->url;
+            $code = $cast->code;
             $goutte = GoutteFacade::request('GET', $url);
-            dump($url);
-            $goutte->filter('#castBox')->each(function ($castBox) {
-
+            $goutte->filter('#p_schedule')->each(function ($schedule) {
+                $schedule->filter('tr')->each(function ($tr) {
+                    $tr->filter('.day')->each(function ($day) {
+                        global $data;
+                        $data['days'][] = trim( preg_replace( '/[\n\r\t ]+/', ' ',$day->text()), ' ');
+                    });
+                    $tr->filter('.time')->each(function ($time) {
+                        global $data;
+                        $data['time'][] = trim( preg_replace( '/[\n\r\t ]+/', ' ',$time->text()), ' ');
+                    });
+                });
             });
+            global $data,$code;
+            Person::where('code', $code)->update(['time' => serialize(array_combine($data['days'],$data['time']))]);
         }
     }
 }

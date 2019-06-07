@@ -10,7 +10,7 @@
 <body>
     <div id="app">
         <main class="py-4">
-            <div class="container">
+            <div class="container px-0 ">
 {{--                <h1>@yield('title','FU-LINE')</h1>--}}
                 <div class="content">
                     @yield('content')
