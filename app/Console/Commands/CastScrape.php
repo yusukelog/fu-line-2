@@ -67,21 +67,19 @@ class CastScrape extends Command
                     $shce .= $key . ":" . $val . "\n";
                 }
                 $message .= "\n" .$cast->name . "\n" . $shce;
-                notice ();
                 Person::where('code', $code)->update(['time' => serialize($times)]);
             }
         }
-        function notice (){
-            global $message;
+        if($message != null){
             $uri = 'https://notify-api.line.me/api/notify';
             $client = new Client();
             $client->post($uri, [
                 'headers' => [
-                    'Content-Type'  => 'application/x-www-form-urlencoded',
+                    'Content-Type' => 'application/x-www-form-urlencoded',
                     'Authorization' => 'Bearer eTKxIWnkJPriXwGcH0cNWYtAkvWQQ8NzrGM7x22DGBK',
                 ],
                 'form_params' => [
-                    'message' => "\n".$message,
+                    'message' => "\n" . $message,
                 ]
             ]);
         }
