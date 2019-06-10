@@ -6,7 +6,12 @@
     <form action="" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="update">
-        <input type="submit" value="リスト更新">
+        <input type="submit" value="全キャスト情報取得">
+    </form>
+    <form action="" method="post">
+        {{ csrf_field() }}
+        <input type="hidden" name="update_time">
+        <input type="submit" value="全キャストスケジュール更新">
     </form>
     <div class="box">
         @foreach($items as $key => $item)

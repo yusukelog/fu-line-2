@@ -68,7 +68,7 @@ class CastScrape extends Command
                     $shce .= $key . ":" . $val . "\n";
                 }
                 $message .= "\n" .$cast->name . "\n" . $shce;
-                Time::where('person_id',$cast->id)->update(['time' => serialize($times)]);
+                Time::updateOrCreate(['person_id' => $cast->id,'time' => serialize($times)]);
             }
         }
         if($message != null){
