@@ -23,7 +23,6 @@ class CreatePeopleTable extends Migration
             $table->integer('west')->nullable($value = true);
             $table->integer('hip')->nullable($value = true);
             $table->string('url')->nullable($value = true);
-            $table->string('time')->nullable($value = true);
             $table->boolean('check')->nullable($value = true);
             $table->string('code')->nullable($value = true);
             $table->timestamps();

@@ -18,10 +18,10 @@
                 </div>
                 @if($item->getTime())
                 <div class="time row col-sm-9 d-flex align-items-center">
-                    @foreach($item->getTime() as $yobi => $time)
+                    @foreach($item->getTime() as $yobi => $val)
                     <dl class="col-sm">
                         <dt>{{$yobi}}</dt>
-                        <dd>{{$time}}</dd>
+                        <dd>{{$val}}</dd>
                     </dl>
                     @endforeach
                 </div>

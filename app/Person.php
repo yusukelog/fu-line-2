@@ -9,7 +9,8 @@ class Person extends Model
 {
     protected $guarded = array('id');
     function getTime(){
-        return unserialize($this->time);
+        $time = optional($this->hasOne('App\Time')->first())->time;
+        return unserialize($time);
     }
     public static $rules = array(
         'name' => 'required|unique:people,name',
