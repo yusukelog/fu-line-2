@@ -18,7 +18,7 @@
             <div class="num col-sm-1 d-flex align-items-center"><a href="?sort=id">番号</a></div>
             <div class="name col-sm-1 d-flex align-items-center"><a href="?sort=name">名前</a></div>
             <div class="time row col-sm-9 d-flex align-items-center">スケジュール</div>
-            <div class="form-check form-check-inline col-sm-1"><a href="">通知設定</a></div>
+            <div class="form-check form-check-inline col-sm-1"><a href="?sort=check">通知設定</a></div>
         </div>
         @foreach($items as $key => $item)
             <div class="list p-2 row border">
