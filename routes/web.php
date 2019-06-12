@@ -11,8 +11,13 @@
 |
 */
 
-Route::get('/','PersonController@index');
-Route::post('/','PersonController@update');
+Route::get('/',['/'=>'chk', 'uses' => 'PersonController@index']);
+Route::post('/',['/'=>'chk', 'uses' => 'PersonController@update']);
 
 Route::get('chk',['as'=>'chk', 'uses' => 'PersonController@chk']);
 Route::post('chk',['as'=>'chk', 'uses' => 'PersonController@chk']);
+
+Route::get('sample', function () {
+    return view('sample');
+});
+
