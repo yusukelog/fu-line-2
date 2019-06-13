@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Weidner\Goutte\GoutteFacade;
 use GuzzleHttp\Client;
 use App\Person;
+use App\Time;
 
 class CastScrape extends Command
 {
@@ -40,7 +41,7 @@ class CastScrape extends Command
      */
     public function handle()
     {
-        global $code,$message;
+        global $code,$message,$casts;
         $casts = Person::where('check',1)->get();
         foreach ($casts as $cast){
             $url = $cast->url;
@@ -67,7 +68,7 @@ class CastScrape extends Command
                     $shce .= $key . ":" . $val . "\n";
                 }
                 $message .= "\n" .$cast->name . "\n" . $shce;
-                Person::where('code', $code)->update(['time' => serialize($times)]);
+                Time::updateOrCreate(['person_id' => $cast->id,'time' => serialize($times)]);
             }
         }
         if($message != null){

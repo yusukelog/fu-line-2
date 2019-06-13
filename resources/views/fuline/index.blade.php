@@ -6,13 +6,23 @@
     <form action="" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="update">
-        <input type="submit" value="リスト更新">
+        <input type="submit" value="全キャスト情報取得">
+    </form>
+    <form action="" method="post">
+        {{ csrf_field() }}
+        <input type="hidden" name="update_time">
+        <input type="submit" value="全キャストスケジュール更新">
     </form>
     <div class="box">
+        <div class="list p-2 row border">
+            <div class="num col-sm-1 d-flex align-items-center"><a href="?sort=id">番号</a></div>
+            <div class="name col-sm-1 d-flex align-items-center"><a href="?sort=name">名前</a></div>
+            <div class="time row col-sm-9 d-flex align-items-center">スケジュール</div>
+            <div class="form-check form-check-inline col-sm-1"><a href="?sort=check">通知設定</a></div>
+        </div>
         @foreach($items as $key => $item)
-            @php $key++; @endphp
             <div class="list p-2 row border">
-                <div class="num col-sm-1 d-flex align-items-center">{{$key}}</div>
+                <div class="num col-sm-1 d-flex align-items-center">{{$item->id}}</div>
                 <div class="name col-sm-1 d-flex align-items-center">
                     <a class="font-weight-bold text-dark" href="{{$item->url}}"><u>{{$item->name}}</u></a>
                 </div>
@@ -33,6 +43,7 @@
             </div>
         @endforeach
     </div>
+    {{$items->appends(['sort' => $sort])->links()}}
 @endsection
 
 @section('footer')

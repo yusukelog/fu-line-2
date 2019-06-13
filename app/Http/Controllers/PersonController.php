@@ -12,8 +12,13 @@ class PersonController extends Controller
 {
     public function index(Request $request)
     {
-        $items = Person::all();
-        return view('fuline.index',['items' => $items]);
+        if(!$request->sort) {
+            $sort = 'id';
+        } else {
+            $sort = $request->sort;
+        }
+        $items = Person::orderBy($sort,'asc')->simplePaginate(20);
+        return view('fuline.index',['items' => $items,'sort' => $sort]);
     }
 
     public function update(Request $request)
