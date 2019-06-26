@@ -62,13 +62,13 @@ class CastScrape extends Command
             global $data,$code,$times,$message;
             $times = array_combine($data['days'],$data['time']);
 
-            if($times != unserialize($cast->time)){
+            if($times != unserialize(Time::where('person_id',$cast->id)->first()->time)){
                 $shce = "";
                 foreach ($times as $key => $val){
                     $shce .= $key . ":" . $val . "\n";
                 }
                 $message .= "\n" .$cast->name . "\n" . $shce;
-                Time::updateOrCreate(['person_id' => $cast->id,'time' => serialize($times)]);
+                Time::where('person_id', $cast->id)->update(['time' => serialize($times)]);
             }
         }
         if($message != null){
